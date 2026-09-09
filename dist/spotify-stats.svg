@@ -20,16 +20,14 @@
 
   <rect width="420" height="116" rx="16" fill="#09090b" stroke="#27272a" stroke-width="1" />
 
-  <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMjcyNzJhIj48cmVjdCB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSI0Ii8+PC9zdmc+" x="14" y="14" width="88" height="88" clip-path="url(#albumClip)" preserveAspectRatio="xMidYMid slice" />
+  <image href="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;88&quot; height=&quot;88&quot; viewBox=&quot;0 0 88 88&quot; fill=&quot;%2318181b&quot;&gt;&lt;rect width=&quot;88&quot; height=&quot;88&quot; rx=&quot;10&quot;/&gt;&lt;circle cx=&quot;44&quot; cy=&quot;44&quot; r=&quot;20&quot; fill=&quot;%2327272a&quot;/&gt;&lt;circle cx=&quot;44&quot; cy=&quot;44&quot; r=&quot;8&quot; fill=&quot;%2309090b&quot;/&gt;&lt;/svg&gt;" x="14" y="14" width="88" height="88" clip-path="url(#albumClip)" preserveAspectRatio="xMidYMid slice" />
   <rect x="14" y="14" width="88" height="88" rx="10" fill="none" stroke="#27272a" stroke-width="1" />
 
   <circle cx="118" cy="25" r="4" fill="#71717a"  />
-  <text x="128" y="28" class="text-status" fill="#a1a1aa">LAST PLAYED</text>
+  <text x="128" y="28" class="text-status" fill="#a1a1aa">IDLE</text>
 
   <text x="118" y="52" class="text-title">No recent track</text>
-
   <text x="118" y="72" class="text-artist">Spotify</text>
-
   <text x="118" y="93" class="text-album">💿 N/A</text>
 
   <g transform="translate(382, 16)">
