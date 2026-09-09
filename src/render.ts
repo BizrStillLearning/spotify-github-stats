@@ -12,7 +12,7 @@ export function renderSvg(activity: TrackActivity): string {
     const album = escapeXml(truncate(activity.album, 40));
 
     const fallbackCover =
-        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="%2327272a"><rect width="24" height="24" rx="4"/></svg>';
+        'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMjcyNzJhIj48cmVjdCB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSI0Ii8+PC9zdmc+';
 
     const coverUrl = activity.albumArtBase64 || fallbackCover;
 
