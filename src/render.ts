@@ -3,22 +3,29 @@ import { escapeXml, truncate } from './sanitize.js';
 
 export function renderSvg(activity: TrackActivity): string {
     const isPlaying = activity.status === 'NOW_PLAYING';
-    const statusLabel = isPlaying ? 'NOW PLAYING' : 'LAST PLAYED';
-    const statusColor = isPlaying ? '#10b981' : '#71717a';
-    const statusTextColor = isPlaying ? '#34d399' : '#a1a1aa';
+    const isOffline = activity.status === 'OFFLINE';
+
+    let statusLabel = 'LAST PLAYED';
+    let statusColor = '#71717a';
+    let statusTextColor = '#a1a1aa';
+
+    if (isPlaying) {
+        statusLabel = 'NOW PLAYING';
+        statusColor = '#10b981';
+        statusTextColor = '#34d399';
+    } else if (isOffline) {
+        statusLabel = 'IDLE';
+    }
 
     const title = escapeXml(truncate(activity.title, 32));
     const artist = escapeXml(truncate(activity.artist, 38));
     const album = escapeXml(truncate(activity.album, 40));
 
     const fallbackCover =
-        'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMjcyNzJhIj48cmVjdCB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSI0Ii8+PC9zdmc+';
+        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="%2318181b"><rect width="88" height="88" rx="10"/><circle cx="44" cy="44" r="20" fill="%2327272a"/><circle cx="44" cy="44" r="8" fill="%2309090b"/></svg>';
 
-    const rawCover = activity.albumArtBase64 && activity.albumArtBase64.startsWith('data:image/')
-        ? activity.albumArtBase64
-        : fallbackCover;
-
-    const safeCoverUrl = escapeXml(rawCover);
+    const coverUrl = activity.albumArtBase64 || fallbackCover;
+    const safeCoverUrl = escapeXml(coverUrl);
 
     return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420" height="116" viewBox="0 0 420 116" fill="none">
   <defs>
@@ -49,9 +56,7 @@ export function renderSvg(activity: TrackActivity): string {
   <text x="128" y="28" class="text-status" fill="${statusTextColor}">${statusLabel}</text>
 
   <text x="118" y="52" class="text-title">${title}</text>
-
   <text x="118" y="72" class="text-artist">${artist}</text>
-
   <text x="118" y="93" class="text-album">💿 ${album}</text>
 
   <g transform="translate(382, 16)">
