@@ -10,10 +10,13 @@ async function imageToBase64(imageUrl: string): Promise<string | null> {
     try {
         const response = await fetch(imageUrl);
         if (!response.ok) return null;
+
+        const contentType = response.headers.get('content-type') || '';
+        if (!contentType.startsWith('image/')) return null;
+
         const arrayBuffer = await response.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
-        const contentType = response.headers.get('content-type') || 'image/jpeg';
-        return `data:${contentType};base64,${buffer.toString('base64')}`;
+        const base64 = Buffer.from(arrayBuffer).toString('base64');
+        return `data:${contentType};base64,${base64}`;
     } catch {
         return null;
     }

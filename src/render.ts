@@ -14,9 +14,13 @@ export function renderSvg(activity: TrackActivity): string {
     const fallbackCover =
         'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMjcyNzJhIj48cmVjdCB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSI0Ii8+PC9zdmc+';
 
-    const coverUrl = activity.albumArtBase64 || fallbackCover;
+    const rawCover = activity.albumArtBase64 && activity.albumArtBase64.startsWith('data:image/')
+        ? activity.albumArtBase64
+        : fallbackCover;
 
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="116" viewBox="0 0 420 116" fill="none">
+    const safeCoverUrl = escapeXml(rawCover);
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420" height="116" viewBox="0 0 420 116" fill="none">
   <defs>
     <clipPath id="albumClip">
       <rect x="14" y="14" width="88" height="88" rx="10" />
@@ -38,7 +42,7 @@ export function renderSvg(activity: TrackActivity): string {
 
   <rect width="420" height="116" rx="16" fill="#09090b" stroke="#27272a" stroke-width="1" />
 
-  <image href="${coverUrl}" x="14" y="14" width="88" height="88" clip-path="url(#albumClip)" preserveAspectRatio="xMidYMid slice" />
+  <image href="${safeCoverUrl}" x="14" y="14" width="88" height="88" clip-path="url(#albumClip)" preserveAspectRatio="xMidYMid slice" />
   <rect x="14" y="14" width="88" height="88" rx="10" fill="none" stroke="#27272a" stroke-width="1" />
 
   <circle cx="118" cy="25" r="4" fill="${statusColor}" ${isPlaying ? 'class="dot-pulse"' : ''} />
