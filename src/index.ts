@@ -17,27 +17,18 @@ async function main() {
 
     const outputDir = path.resolve(process.cwd(), 'dist');
     const outputPath = path.join(outputDir, 'spotify-stats.svg');
-    const cssPath = path.join(outputDir, 'tailwind.css');
 
-    console.log('1. Membaca compiled Tailwind CSS...');
-    let compiledCss = '';
-    try {
-        compiledCss = await fs.readFile(cssPath, 'utf-8');
-    } catch {
-        console.warn('Peringatan: dist/tailwind.css tidak ditemukan. SVG akan dirender tanpa stylesheet Tailwind.');
-    }
-
-    console.log('2. Menukar refresh token ke access token...');
+    console.log('1. Menukar refresh token ke access token...');
     const accessToken = await getAccessToken(clientId, clientSecret, refreshToken);
 
-    console.log('3. Mengambil aktivitas trek Spotify...');
+    console.log('2. Mengambil aktivitas trek Spotify...');
     const activity = await getLastActivity(accessToken);
     console.log(`   -> Status: ${activity.status} | Lagu: ${activity.title} (${activity.artist})`);
 
-    console.log('4. Merender kartu SVG...');
-    const svgContent = renderSvg(activity, compiledCss);
+    console.log('3. Merender kartu SVG...');
+    const svgContent = renderSvg(activity);
 
-    console.log('5. Menyimpan SVG ke disk...');
+    console.log('4. Menyimpan SVG ke disk...');
     await fs.mkdir(outputDir, { recursive: true });
     await fs.writeFile(outputPath, svgContent, 'utf-8');
 
