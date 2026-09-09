@@ -29,6 +29,7 @@ export async function getLastActivity(accessToken: string): Promise<TrackActivit
 
     try {
         const currentRes = await fetch('https://api.spotify.com/v1/me/player/currently-playing', { headers });
+        console.log(`[Spotify API] currently-playing status: ${currentRes.status}`);
 
         if (currentRes.status === 200) {
             const data = await currentRes.json();
@@ -47,26 +48,31 @@ export async function getLastActivity(accessToken: string): Promise<TrackActivit
             }
         }
     } catch (err) {
-        console.warn('Gagal membaca currently-playing, fallback ke recently-played:', err);
+        console.warn('Gagal membaca currently-playing:', err);
     }
 
-    const recentRes = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', { headers });
+    try {
+        const recentRes = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', { headers });
+        console.log(`[Spotify API] recently-played status: ${recentRes.status}`);
 
-    if (recentRes.status === 200) {
-        const data = await recentRes.json();
-        if (data.items && data.items.length > 0) {
-            const track = data.items[0].track;
-            const albumImg = track.album?.images?.[0]?.url;
-            const albumArtBase64 = albumImg ? await imageToBase64(albumImg) : null;
+        if (recentRes.status === 200) {
+            const data = await recentRes.json();
+            if (data.items && data.items.length > 0) {
+                const track = data.items[0].track;
+                const albumImg = track.album?.images?.[0]?.url;
+                const albumArtBase64 = albumImg ? await imageToBase64(albumImg) : null;
 
-            return {
-                status: 'LAST_PLAYED',
-                title: track.name,
-                artist: track.artists.map((a: { name: string }) => a.name).join(', '),
-                album: track.album.name,
-                albumArtBase64
-            };
+                return {
+                    status: 'LAST_PLAYED',
+                    title: track.name,
+                    artist: track.artists.map((a: { name: string }) => a.name).join(', '),
+                    album: track.album.name,
+                    albumArtBase64
+                };
+            }
         }
+    } catch (err) {
+        console.warn('Gagal membaca recently-played:', err);
     }
 
     return {

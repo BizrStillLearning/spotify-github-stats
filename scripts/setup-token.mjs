@@ -7,6 +7,7 @@ const PORT = 8888;
 const REDIRECT_URI = `http://127.0.0.1:${PORT}/callback`;
 const SCOPES = [
     'user-read-currently-playing',
+    'user-read-playback-state',
     'user-read-recently-played'
 ].join(' ');
 
