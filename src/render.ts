@@ -14,9 +14,9 @@ export function renderSvg(activity: TrackActivity, compiledCss: string): string 
     const coverUrl = activity.albumArtBase64 || fallbackCover;
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="116" viewBox="0 0 420 116" fill="none">
-  <foreignObject width="100%" height="100%">
-    <div xmlns="http://www.w3.org/1999/xhtml" class="w-full h-full">
-      <style>
+  <defs>
+    <style type="text/css">
+      <![CDATA[
         ${compiledCss}
         @keyframes pulse-dot {
           0%, 100% { opacity: 1; transform: scale(1); }
@@ -25,16 +25,17 @@ export function renderSvg(activity: TrackActivity, compiledCss: string): string 
         .animate-status-dot {
           animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
-      </style>
-
+      ]]>
+    </style>
+  </defs>
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="w-full h-full">
       <div class="box-border flex items-center w-full h-full p-3.5 bg-zinc-950 border border-zinc-800/80 rounded-2xl shadow-xl font-sans text-white">
         <div class="relative shrink-0 mr-3.5 w-18 h-18 rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-inner">
           <img src="${coverUrl}" alt="Album Art" class="w-full h-full object-cover" />
         </div>
 
-        <!-- Info Section -->
         <div class="flex flex-col justify-between flex-1 min-w-0 h-18 py-0.5">
-          <!-- Status Badge -->
           <div class="flex items-center space-x-1.5">
             <span class="w-2 h-2 rounded-full ${isPlaying ? 'bg-emerald-500 animate-status-dot' : 'bg-zinc-500'}"></span>
             <span class="text-[10px] font-bold tracking-widest uppercase ${isPlaying ? 'text-emerald-400' : 'text-zinc-400'}">
