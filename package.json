@@ -1,0 +1,22 @@
+{
+  "name": "spotify-github-stats",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/tailwind.css --minify",
+    "start": "npm run build:css && tsx src/index.ts",
+    "auth:setup": "node scripts/setup-token.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^26.5.0",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
