@@ -10,8 +10,10 @@ async function imageToBase64(imageUrl: string): Promise<string | null> {
     try {
         const response = await fetch(imageUrl);
         if (!response.ok) return null;
+
         const contentType = response.headers.get('content-type') || '';
         if (!contentType.startsWith('image/')) return null;
+
         const arrayBuffer = await response.arrayBuffer();
         return `data:${contentType};base64,${Buffer.from(arrayBuffer).toString('base64')}`;
     } catch {
@@ -19,61 +21,50 @@ async function imageToBase64(imageUrl: string): Promise<string | null> {
     }
 }
 
-export async function getLastActivity(accessToken: string): Promise<TrackActivity> {
-    const headers = { Authorization: `Bearer ${accessToken}` };
+export async function getLastActivity(apiKey: string, username: string): Promise<TrackActivity> {
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${encodeURIComponent(
+        username
+    )}&api_key=${encodeURIComponent(apiKey)}&format=json&limit=1`;
 
     try {
-        const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', { headers });
-        console.log(`[SPOTIFY DEBUG] currently-playing HTTP: ${res.status}`);
-
-        if (res.status === 200) {
-            const data = await res.json();
-            console.log(`[SPOTIFY DEBUG] is_playing: ${data?.is_playing}, item: ${data?.item?.name}`);
-            if (data && data.is_playing && data.item) {
-                const track = data.item;
-                const img = track.album?.images?.[0]?.url;
-                return {
-                    status: 'NOW_PLAYING',
-                    title: track.name,
-                    artist: track.artists.map((a: { name: string }) => a.name).join(', '),
-                    album: track.album.name,
-                    albumArtBase64: img ? await imageToBase64(img) : null
-                };
-            }
-        } else {
-            const text = await res.text();
-            console.log(`[SPOTIFY DEBUG] currently-playing body: ${text}`);
+        const res = await fetch(url);
+        if (!res.ok) {
+            console.error(`[LASTFM ERROR] HTTP status: ${res.status}`);
+            return getFallback();
         }
-    } catch (err) {
-        console.error('[SPOTIFY DEBUG] Error currently-playing:', err);
-    }
 
-    try {
-        const res = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', { headers });
-        console.log(`[SPOTIFY DEBUG] recently-played HTTP: ${res.status}`);
+        const data = await res.json();
+        const tracks = data?.recenttracks?.track;
 
-        if (res.status === 200) {
-            const data = await res.json();
-            console.log(`[SPOTIFY DEBUG] recently-played items count: ${data?.items?.length}`);
-            if (data.items && data.items.length > 0) {
-                const track = data.items[0].track;
-                const img = track.album?.images?.[0]?.url;
-                return {
-                    status: 'LAST_PLAYED',
-                    title: track.name,
-                    artist: track.artists.map((a: { name: string }) => a.name).join(', '),
-                    album: track.album.name,
-                    albumArtBase64: img ? await imageToBase64(img) : null
-                };
-            }
-        } else {
-            const text = await res.text();
-            console.log(`[SPOTIFY DEBUG] recently-played body: ${text}`);
+        if (!tracks || tracks.length === 0) {
+            return getFallback();
         }
-    } catch (err) {
-        console.error('[SPOTIFY DEBUG] Error recently-played:', err);
-    }
 
+        const currentTrack = Array.isArray(tracks) ? tracks[0] : tracks;
+        const isNowPlaying = currentTrack['@attr']?.nowplaying === 'true';
+
+        const images = currentTrack.image || [];
+        const coverObj = images.find((img: { size: string }) => img.size === 'extralarge')
+            || images.find((img: { size: string }) => img.size === 'large')
+            || images[images.length - 1];
+
+        const coverUrl = coverObj?.['#text'];
+        const albumArtBase64 = coverUrl ? await imageToBase64(coverUrl) : null;
+
+        return {
+            status: isNowPlaying ? 'NOW_PLAYING' : 'LAST_PLAYED',
+            title: currentTrack.name || 'Unknown Track',
+            artist: currentTrack.artist?.['#text'] || currentTrack.artist?.name || 'Unknown Artist',
+            album: currentTrack.album?.['#text'] || 'Unknown Album',
+            albumArtBase64
+        };
+    } catch (err) {
+        console.error('[LASTFM ERROR]', err);
+        return getFallback();
+    }
+}
+
+function getFallback(): TrackActivity {
     return {
         status: 'OFFLINE',
         title: 'No recent track',
