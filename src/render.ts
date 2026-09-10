@@ -4,133 +4,83 @@ import { escapeXml, truncate } from './sanitize.js';
 export function renderSvg(tracks: TrackItem[]): string {
     const rowHeight = 44;
     const paddingX = 16;
-    const headerHeight = 65;
-    const tableTop = headerHeight + 30;
-    const width = 450;
-    const totalHeight = tableTop + Math.max(tracks.length, 1) * rowHeight + 16;
+    const headerHeight = 36;
+    const tableTop = headerHeight + 24;
+    const width = 420;
+    const totalHeight = tableTop + Math.max(tracks.length, 1) * rowHeight + 12;
 
     const fallbackCover =
-        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="%231a0933"><rect width="30" height="30" rx="4"/><circle cx="15" cy="15" r="6" fill="%23ff2a85"/></svg>';
+        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="%23392e56"><rect width="32" height="32" rx="4"/><circle cx="16" cy="16" r="6" fill="%2356477d"/></svg>';
 
     const rows = tracks.length === 0
-        ? `<text x="24" y="${tableTop + 28}" fill="#a390c4" font-family="'Courier New', monospace" font-size="12">NO RECENT SIGNAL RECORDED</text>`
+        ? `<text x="${paddingX}" y="${tableTop + 24}" fill="#9282b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">No recent tracks available.</text>`
         : tracks
             .map((t, idx) => {
                 const y = tableTop + idx * rowHeight;
                 const safeCover = escapeXml(t.albumArtBase64 || fallbackCover);
-                const safeTitle = escapeXml(truncate(t.title, 24));
-                const safeArtist = escapeXml(truncate(t.artist, 20));
-                const clipId = `synth-clip-${idx}`;
-
-                const timeBadge = t.isPlaying
-                    ? `
-              <g transform="translate(${width - paddingX - 48}, ${y + 14})">
-                <rect width="44" height="18" rx="4" fill="rgba(255, 42, 133, 0.2)" stroke="#ff2a85" stroke-width="1" />
-                <text x="22" y="13" fill="#ff2a85" font-family="'Courier New', monospace" font-size="10" font-weight="bold" text-anchor="middle" class="glow-pink">NOW</text>
-              </g>
-            `
-                    : `
-              <text x="${width - paddingX - 6}" y="${y + 26}" fill="#7b6299" font-family="'Courier New', monospace" font-size="11" text-anchor="end">${t.timeAgo}</text>
-            `;
+                const safeTitle = escapeXml(truncate(t.title, 26));
+                const safeArtist = escapeXml(truncate(t.artist, 26));
+                const clipId = `cover-clip-${idx}`;
 
                 return `
-      <!-- Table Row ${idx + 1} -->
+      <!-- Row ${idx + 1} -->
       <g>
-        <line x1="${paddingX}" y1="${y}" x2="${width - paddingX}" y2="${y}" stroke="#ff2a85" stroke-opacity="0.15" stroke-width="1" />
+        <line x1="${paddingX}" y1="${y}" x2="${width - paddingX}" y2="${y}" stroke="#392e56" stroke-width="1" />
         
-        <text x="${paddingX + 6}" y="${y + 26}" fill="#ff2a85" font-family="'Courier New', monospace" font-size="11" font-weight="bold">#0${idx + 1}</text>
-
         <defs>
           <clipPath id="${clipId}">
-            <rect x="${paddingX + 34}" y="${y + 7}" width="30" height="30" rx="4" />
+            <rect x="${paddingX}" y="${y + 6}" width="32" height="32" rx="5" />
           </clipPath>
         </defs>
-        <image href="${safeCover}" x="${paddingX + 34}" y="${y + 7}" width="30" height="30" clip-path="url(#${clipId})" preserveAspectRatio="xMidYMid slice" />
-        <rect x="${paddingX + 34}" y="${y + 7}" width="30" height="30" rx="4" fill="none" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.6" />
+        <image href="${safeCover}" x="${paddingX}" y="${y + 6}" width="32" height="32" clip-path="url(#${clipId})" preserveAspectRatio="xMidYMid slice" />
+        <rect x="${paddingX}" y="${y + 6}" width="32" height="32" rx="5" fill="none" stroke="#483a6c" stroke-width="1" />
 
-        <text x="${paddingX + 72}" y="${y + 21}" class="track-title">${safeTitle}</text>
-        <text x="${paddingX + 72}" y="${y + 34}" class="track-artist">${safeArtist}</text>
+        <text x="${paddingX + 42}" y="${y + 20}" class="track-title">${safeTitle}</text>
+        <text x="${paddingX + 42}" y="${y + 33}" class="track-artist">${safeArtist}</text>
 
-        ${timeBadge}
+        <text x="${width - paddingX}" y="${y + 25}" class="track-time" text-anchor="end">${t.timeAgo}</text>
       </g>`;
             })
             .join('');
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${totalHeight}" viewBox="0 0 ${width} ${totalHeight}" fill="none">
   <defs>
-    <linearGradient id="synthBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d0221" />
-      <stop offset="50%" stop-color="#150536" />
-      <stop offset="100%" stop-color="#050112" />
-    </linearGradient>
-
-    <linearGradient id="neonBar" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff2a85" />
-      <stop offset="50%" stop-color="#9d4edd" />
-      <stop offset="100%" stop-color="#00f0ff" />
-    </linearGradient>
-
-    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-
     <style>
       .track-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        fill: #f1edfa;
+      }
+      .track-artist {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        font-size: 11px;
+        fill: #b4a5d4;
+      }
+      .track-time {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 11px;
+        fill: #8574a8;
+      }
+      .header-title {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: 12px;
         font-weight: 700;
-        fill: #ffffff;
-      }
-      .track-artist {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 10px;
-        fill: #00f0ff;
-        letter-spacing: 0.02em;
-      }
-      .col-header {
-        font-family: 'Courier New', monospace;
-        font-size: 10px;
-        font-weight: 700;
-        fill: #ff2a85;
-        letter-spacing: 0.12em;
-      }
-      .synth-title {
-        font-family: 'Courier New', -apple-system, monospace;
-        font-size: 14px;
-        font-weight: 900;
-        letter-spacing: 0.18em;
-        fill: #00f0ff;
-      }
-      .glow-pink {
-        filter: drop-shadow(0 0 3px #ff2a85);
+        letter-spacing: 0.05em;
+        fill: #d5c8ed;
       }
     </style>
   </defs>
 
-  <rect width="${width}" height="${totalHeight}" rx="12" fill="url(#synthBg)" stroke="#301551" stroke-width="1.5" />
-  
-  <rect x="2" y="2" width="${width - 4}" height="${totalHeight - 4}" rx="10" fill="none" stroke="#ff2a85" stroke-opacity="0.2" stroke-width="1" />
+  <rect width="${width}" height="${totalHeight}" rx="12" fill="#28203d" stroke="#392e56" stroke-width="1" />
 
-  <rect x="0" y="0" width="${width}" height="3" fill="url(#neonBar)" />
-
-  <g transform="translate(${paddingX}, 28)">
-    <text x="0" y="0" class="synth-title" filter="url(#neonGlow)">// RECENTLY_PLAYED</text>
-    <text x="0" y="16" fill="#a390c4" font-family="'Courier New', monospace" font-size="9" letter-spacing="0.08em">SPOTIFY AUDIO TELEMETRY</text>
-  </g>
-
-  <g transform="translate(${paddingX}, ${headerHeight + 14})">
-    <text x="6" y="0" class="col-header">TRK</text>
-    <text x="72" y="0" class="col-header">TRACK / ARTIST</text>
-    <text x="${width - paddingX * 2 - 6}" y="0" class="col-header" text-anchor="end">TIME</text>
-    <line x1="0" y1="8" x2="${width - paddingX * 2}" y2="8" stroke="#00f0ff" stroke-opacity="0.4" stroke-width="1.2" />
+  <g transform="translate(${paddingX}, 24)">
+    <text x="0" y="0" class="header-title">RECENTLY PLAYED</text>
+    <g transform="translate(${width - paddingX * 2 - 18}, -13)">
+      <path fill="#1ed760" d="M9 0C4.029 0 0 4.029 0 9s4.029 9 9 9 9-4.029 9-9S13.971 0 9 0zm4.127 12.982c-.162.265-.507.348-.771.186-2.115-1.291-4.777-1.584-7.914-.867-.302.069-.603-.12-.672-.421-.069-.301.12-.603.421-.672 3.428-.784 6.369-.447 8.75 1.003.264.162.348.507.186.771zm1.103-2.452c-.203.33-.635.433-.965.231-2.42-1.487-6.107-1.918-8.969-1.049-.372.113-.764-.096-.877-.468-.113-.372.096-.764.469-.877 3.268-.991 7.332-.511 10.11 1.198.33.203.434.635.232.965zm.094-2.551C11.6 6.345 6.815 6.188 3.967 7.053c-.453.138-.933-.117-1.071-.57-.138-.453.117-.933.57-1.071 3.258-.988 8.539-.808 11.829 1.146.408.242.542.77.3 1.178-.242.408-.77.542-1.178.3z"/>
+    </g>
   </g>
 
   ${rows}
-  
-  <line x1="${paddingX}" y1="${totalHeight - 14}" x2="${width - paddingX}" y2="${totalHeight - 14}" stroke="#ff2a85" stroke-opacity="0.3" stroke-width="1" />
 </svg>`;
 }
