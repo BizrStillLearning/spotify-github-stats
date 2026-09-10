@@ -1,4 +1,4 @@
-import { TrackItem } from './spotify.js';
+import { TrackItem, AlbumItem } from './spotify.js';
 import { escapeXml, truncate } from './sanitize.js';
 
 export function renderSvg(tracks: TrackItem[]): string {
@@ -69,5 +69,49 @@ export function renderSvg(tracks: TrackItem[]): string {
   </g>
 
   ${trackRows}
+</svg>`;
+}
+
+export function renderAlbumGridSvg(albums: AlbumItem[]): string {
+    const cardSize = 120;
+    const gap = 16;
+    const padding = 16;
+    const headerHeight = 36;
+    const cols = 2;
+    const rows = Math.ceil(Math.min(albums.length || 1, 6) / cols);
+
+    const totalWidth = padding * 2 + cols * cardSize + (cols - 1) * gap;
+    const totalHeight = headerHeight + rows * cardSize + (rows - 1) * gap + padding;
+
+    const fallbackCover =
+        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="%2318181b"><rect width="120" height="120" rx="10"/><circle cx="60" cy="60" r="24" fill="%2327272a"/></svg>';
+
+    const albumCards = albums.slice(0, 6).map((album, idx) => {
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+        const x = padding + col * (cardSize + gap);
+        const y = headerHeight + row * (cardSize + gap);
+        const clipId = `album-clip-${idx}`;
+        const cover = escapeXml(album.albumArtBase64 || fallbackCover);
+
+        return `
+    <g transform="translate(${x}, ${y})">
+      <defs>
+        <clipPath id="${clipId}">
+          <rect width="${cardSize}" height="${cardSize}" rx="10" />
+        </clipPath>
+      </defs>
+      <image href="${cover}" width="${cardSize}" height="${cardSize}" clip-path="url(#${clipId})" preserveAspectRatio="xMidYMid slice" />
+      <rect width="${cardSize}" height="${cardSize}" rx="10" fill="none" stroke="#27272a" stroke-width="1" />
+    </g>`;
+    }).join('');
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${totalWidth}" height="${totalHeight}" viewBox="0 0 ${totalWidth} ${totalHeight}" fill="none">
+  <style>
+    .header-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 700; fill: #f4f4f5; }
+  </style>
+  <rect width="${totalWidth}" height="${totalHeight}" rx="16" fill="#09090b" stroke="#27272a" stroke-width="1" />
+  <text x="${padding}" y="24" class="header-title">Curated Favorites 💿</text>
+  ${albumCards}
 </svg>`;
 }
