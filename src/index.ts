@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { getLastActivity } from './spotify.js';
+import { getRecentTracks } from './spotify.js';
 import { renderSvg } from './render.js';
 
 async function main() {
@@ -16,12 +16,12 @@ async function main() {
     const outputDir = path.resolve(process.cwd(), 'dist');
     const outputPath = path.join(outputDir, 'spotify-stats.svg');
 
-    console.log('1. Mengambil aktivitas musik via Last.fm API...');
-    const activity = await getLastActivity(apiKey, username);
-    console.log(`   -> Status: ${activity.status} | Lagu: ${activity.title} (${activity.artist})`);
+    console.log('1. Mengambil 8 aktivitas trek via Last.fm API...');
+    const tracks = await getRecentTracks(apiKey, username, 8);
+    console.log(`   -> Berhasil mendapatkan ${tracks.length} lagu.`);
 
-    console.log('2. Merender kartu SVG...');
-    const svgContent = renderSvg(activity);
+    console.log('2. Merender kartu SVG multi-track...');
+    const svgContent = renderSvg(tracks);
 
     console.log('3. Menyimpan SVG ke disk...');
     await fs.mkdir(outputDir, { recursive: true });
