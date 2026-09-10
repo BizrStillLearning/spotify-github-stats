@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -27,9 +29,8 @@ jobs:
 
       - name: Generate Spotify Card
         env:
-          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
-          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
-          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_USERNAME: ${{ secrets.LASTFM_USERNAME }}
         run: npm start
 
       - name: Commit & Push Changes
@@ -41,7 +42,8 @@ jobs:
           if git status --porcelain dist/spotify-stats.svg | grep -q 'dist/spotify-stats.svg'; then
             git add dist/spotify-stats.svg
             git commit -m "chore(spotify): update last played track [skip ci]"
-            git push
+            git pull --rebase origin main
+            git push origin main
           else
             echo "Tidak ada perubahan trek, melewati commit."
           fi
