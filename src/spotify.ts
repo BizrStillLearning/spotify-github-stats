@@ -8,12 +8,12 @@ export interface TrackItem {
 }
 
 function formatRelativeTime(uts?: string): string {
-    if (!uts) return 'just now';
+    if (!uts) return '1m ago';
     const timestamp = parseInt(uts, 10);
-    if (isNaN(timestamp)) return 'just now';
+    if (isNaN(timestamp)) return '1m ago';
 
     const diffSec = Math.floor(Date.now() / 1000) - timestamp;
-    if (diffSec < 60) return 'just now';
+    if (diffSec < 60) return '1m ago';
     const diffMin = Math.floor(diffSec / 60);
     if (diffMin < 60) return `${diffMin}m ago`;
     const diffHours = Math.floor(diffMin / 60);
@@ -65,7 +65,7 @@ export async function getRecentTracks(apiKey: string, username: string, limit = 
                 const coverUrl = coverObj?.['#text'];
                 const albumArtBase64 = coverUrl ? await imageToBase64(coverUrl) : null;
 
-                const timeAgo = isPlaying ? 'playing now' : formatRelativeTime(item.date?.uts);
+                const timeAgo = isPlaying ? '1m ago' : formatRelativeTime(item.date?.uts);
 
                 return {
                     title: item.name || 'Unknown Track',
