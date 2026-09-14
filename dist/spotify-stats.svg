@@ -52,7 +52,7 @@
         <text x="58" y="80" class="track-title">Panorama</text>
         <text x="58" y="93" class="track-artist">IZ*ONE</text>
 
-        <text x="404" y="85" class="track-time" text-anchor="end">21h ago</text>
+        <text x="404" y="85" class="track-time" text-anchor="end">1d ago</text>
       </g>
       <!-- Row 2 -->
       <g>
@@ -69,7 +69,7 @@
         <text x="58" y="124" class="track-title">Kill This Love</text>
         <text x="58" y="137" class="track-artist">BLACKPINK</text>
 
-        <text x="404" y="129" class="track-time" text-anchor="end">21h ago</text>
+        <text x="404" y="129" class="track-time" text-anchor="end">1d ago</text>
       </g>
       <!-- Row 3 -->
       <g>
