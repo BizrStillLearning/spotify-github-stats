@@ -52,7 +52,7 @@
         <text x="58" y="80" class="track-title">Cherish (My Love)</text>
         <text x="58" y="93" class="track-artist">ILLIT</text>
 
-        <text x="404" y="85" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="85" class="track-time" text-anchor="end">9h ago</text>
       </g>
       <!-- Row 2 -->
       <g>
@@ -63,13 +63,13 @@
             <rect x="16" y="110" width="32" height="32" rx="5" />
           </clipPath>
         </defs>
-        <image href="data:image/jpeg;base64,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" x="16" y="110" width="32" height="32" clip-path="url(#cover-clip-1)" preserveAspectRatio="xMidYMid slice" />
+        <image href="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;32&quot; height=&quot;32&quot; viewBox=&quot;0 0 32 32&quot; fill=&quot;%23392e56&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;4&quot;/&gt;&lt;circle cx=&quot;16&quot; cy=&quot;16&quot; r=&quot;6&quot; fill=&quot;%2356477d&quot;/&gt;&lt;/svg&gt;" x="16" y="110" width="32" height="32" clip-path="url(#cover-clip-1)" preserveAspectRatio="xMidYMid slice" />
         <rect x="16" y="110" width="32" height="32" rx="5" fill="none" stroke="#483a6c" stroke-width="1" />
 
         <text x="58" y="124" class="track-title">Mr. Simple</text>
         <text x="58" y="137" class="track-artist">SUPER JUNIOR</text>
 
-        <text x="404" y="129" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="129" class="track-time" text-anchor="end">9h ago</text>
       </g>
       <!-- Row 3 -->
       <g>
@@ -86,7 +86,7 @@
         <text x="58" y="168" class="track-title">WDA (Whole Different Anim…</text>
         <text x="58" y="181" class="track-artist">aespa</text>
 
-        <text x="404" y="173" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="173" class="track-time" text-anchor="end">9h ago</text>
       </g>
       <!-- Row 4 -->
       <g>
@@ -103,7 +103,7 @@
         <text x="58" y="212" class="track-title">Kick It</text>
         <text x="58" y="225" class="track-artist">NCT 127</text>
 
-        <text x="404" y="217" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="217" class="track-time" text-anchor="end">9h ago</text>
       </g>
       <!-- Row 5 -->
       <g>
@@ -120,7 +120,7 @@
         <text x="58" y="256" class="track-title">JUMP</text>
         <text x="58" y="269" class="track-artist">BLACKPINK</text>
 
-        <text x="404" y="261" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="261" class="track-time" text-anchor="end">9h ago</text>
       </g>
       <!-- Row 6 -->
       <g>
@@ -137,7 +137,7 @@
         <text x="58" y="300" class="track-title">IDOL</text>
         <text x="58" y="313" class="track-artist">BTS</text>
 
-        <text x="404" y="305" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="305" class="track-time" text-anchor="end">9h ago</text>
       </g>
       <!-- Row 7 -->
       <g>
@@ -154,7 +154,7 @@
         <text x="58" y="344" class="track-title">HANDS UP</text>
         <text x="58" y="357" class="track-artist">MEOVV</text>
 
-        <text x="404" y="349" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="349" class="track-time" text-anchor="end">9h ago</text>
       </g>
       <!-- Row 8 -->
       <g>
@@ -171,6 +171,6 @@
         <text x="58" y="388" class="track-title">LOCKED IN</text>
         <text x="58" y="401" class="track-artist">BABYMONSTER</text>
 
-        <text x="404" y="393" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="393" class="track-time" text-anchor="end">9h ago</text>
       </g>
 </svg>
