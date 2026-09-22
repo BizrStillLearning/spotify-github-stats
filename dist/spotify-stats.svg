@@ -52,7 +52,7 @@
         <text x="58" y="80" class="track-title">Whiplash</text>
         <text x="58" y="93" class="track-artist">aespa</text>
 
-        <text x="404" y="85" class="track-time" text-anchor="end">32m ago</text>
+        <text x="404" y="85" class="track-time" text-anchor="end">4h ago</text>
       </g>
       <!-- Row 2 -->
       <g>
@@ -69,7 +69,7 @@
         <text x="58" y="124" class="track-title">RUDE!</text>
         <text x="58" y="137" class="track-artist">Hearts2Hearts</text>
 
-        <text x="404" y="129" class="track-time" text-anchor="end">36m ago</text>
+        <text x="404" y="129" class="track-time" text-anchor="end">4h ago</text>
       </g>
       <!-- Row 3 -->
       <g>
@@ -86,7 +86,7 @@
         <text x="58" y="168" class="track-title">DRIP</text>
         <text x="58" y="181" class="track-artist">BABYMONSTER</text>
 
-        <text x="404" y="173" class="track-time" text-anchor="end">39m ago</text>
+        <text x="404" y="173" class="track-time" text-anchor="end">4h ago</text>
       </g>
       <!-- Row 4 -->
       <g>
@@ -103,7 +103,7 @@
         <text x="58" y="212" class="track-title">What is Love?</text>
         <text x="58" y="225" class="track-artist">TWICE</text>
 
-        <text x="404" y="217" class="track-time" text-anchor="end">43m ago</text>
+        <text x="404" y="217" class="track-time" text-anchor="end">4h ago</text>
       </g>
       <!-- Row 5 -->
       <g>
@@ -120,7 +120,7 @@
         <text x="58" y="256" class="track-title">REBEL HEART</text>
         <text x="58" y="269" class="track-artist">IVE</text>
 
-        <text x="404" y="261" class="track-time" text-anchor="end">47m ago</text>
+        <text x="404" y="261" class="track-time" text-anchor="end">4h ago</text>
       </g>
       <!-- Row 6 -->
       <g>
@@ -131,13 +131,13 @@
             <rect x="16" y="286" width="32" height="32" rx="5" />
           </clipPath>
         </defs>
-        <image href="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;32&quot; height=&quot;32&quot; viewBox=&quot;0 0 32 32&quot; fill=&quot;%23392e56&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;4&quot;/&gt;&lt;circle cx=&quot;16&quot; cy=&quot;16&quot; r=&quot;6&quot; fill=&quot;%2356477d&quot;/&gt;&lt;/svg&gt;" x="16" y="286" width="32" height="32" clip-path="url(#cover-clip-5)" preserveAspectRatio="xMidYMid slice" />
+        <image href="data:image/jpeg;base64,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" x="16" y="286" width="32" height="32" clip-path="url(#cover-clip-5)" preserveAspectRatio="xMidYMid slice" />
         <rect x="16" y="286" width="32" height="32" rx="5" fill="none" stroke="#483a6c" stroke-width="1" />
 
         <text x="58" y="300" class="track-title">Love Shot</text>
         <text x="58" y="313" class="track-artist">Exo</text>
 
-        <text x="404" y="305" class="track-time" text-anchor="end">50m ago</text>
+        <text x="404" y="305" class="track-time" text-anchor="end">4h ago</text>
       </g>
       <!-- Row 7 -->
       <g>
@@ -154,7 +154,7 @@
         <text x="58" y="344" class="track-title">Blue - WINTER Solo</text>
         <text x="58" y="357" class="track-artist">aespa</text>
 
-        <text x="404" y="349" class="track-time" text-anchor="end">13h ago</text>
+        <text x="404" y="349" class="track-time" text-anchor="end">16h ago</text>
       </g>
       <!-- Row 8 -->
       <g>
@@ -171,6 +171,6 @@
         <text x="58" y="388" class="track-title">&apos;Til We Die</text>
         <text x="58" y="401" class="track-artist">aespa</text>
 
-        <text x="404" y="393" class="track-time" text-anchor="end">13h ago</text>
+        <text x="404" y="393" class="track-time" text-anchor="end">16h ago</text>
       </g>
 </svg>
