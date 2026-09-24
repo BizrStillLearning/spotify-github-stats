@@ -52,7 +52,7 @@
         <text x="58" y="80" class="track-title">ICONIC BY MISTAKE</text>
         <text x="58" y="93" class="track-artist">LE SSERAFIM</text>
 
-        <text x="404" y="85" class="track-time" text-anchor="end">6h ago</text>
+        <text x="404" y="85" class="track-time" text-anchor="end">10h ago</text>
       </g>
       <!-- Row 2 -->
       <g>
@@ -69,7 +69,7 @@
         <text x="58" y="124" class="track-title">AS IF IT&apos;S YOUR LAST</text>
         <text x="58" y="137" class="track-artist">BLACKPINK</text>
 
-        <text x="404" y="129" class="track-time" text-anchor="end">7h ago</text>
+        <text x="404" y="129" class="track-time" text-anchor="end">10h ago</text>
       </g>
       <!-- Row 3 -->
       <g>
@@ -86,7 +86,7 @@
         <text x="58" y="168" class="track-title">REBEL HEART</text>
         <text x="58" y="181" class="track-artist">IVE</text>
 
-        <text x="404" y="173" class="track-time" text-anchor="end">7h ago</text>
+        <text x="404" y="173" class="track-time" text-anchor="end">10h ago</text>
       </g>
       <!-- Row 4 -->
       <g>
@@ -103,7 +103,7 @@
         <text x="58" y="212" class="track-title">Strategy</text>
         <text x="58" y="225" class="track-artist">TWICE</text>
 
-        <text x="404" y="217" class="track-time" text-anchor="end">7h ago</text>
+        <text x="404" y="217" class="track-time" text-anchor="end">10h ago</text>
       </g>
       <!-- Row 5 -->
       <g>
@@ -120,7 +120,7 @@
         <text x="58" y="256" class="track-title">OMG</text>
         <text x="58" y="269" class="track-artist">NewJeans</text>
 
-        <text x="404" y="261" class="track-time" text-anchor="end">7h ago</text>
+        <text x="404" y="261" class="track-time" text-anchor="end">10h ago</text>
       </g>
       <!-- Row 6 -->
       <g>
@@ -131,13 +131,13 @@
             <rect x="16" y="286" width="32" height="32" rx="5" />
           </clipPath>
         </defs>
-        <image href="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;32&quot; height=&quot;32&quot; viewBox=&quot;0 0 32 32&quot; fill=&quot;%23392e56&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;4&quot;/&gt;&lt;circle cx=&quot;16&quot; cy=&quot;16&quot; r=&quot;6&quot; fill=&quot;%2356477d&quot;/&gt;&lt;/svg&gt;" x="16" y="286" width="32" height="32" clip-path="url(#cover-clip-5)" preserveAspectRatio="xMidYMid slice" />
+        <image href="data:image/jpeg;base64,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" x="16" y="286" width="32" height="32" clip-path="url(#cover-clip-5)" preserveAspectRatio="xMidYMid slice" />
         <rect x="16" y="286" width="32" height="32" rx="5" fill="none" stroke="#483a6c" stroke-width="1" />
 
         <text x="58" y="300" class="track-title">ICONIK</text>
         <text x="58" y="313" class="track-artist">ZEROBASEONE</text>
 
-        <text x="404" y="305" class="track-time" text-anchor="end">7h ago</text>
+        <text x="404" y="305" class="track-time" text-anchor="end">10h ago</text>
       </g>
       <!-- Row 7 -->
       <g>
@@ -154,7 +154,7 @@
         <text x="58" y="344" class="track-title">DRIP</text>
         <text x="58" y="357" class="track-artist">BABYMONSTER</text>
 
-        <text x="404" y="349" class="track-time" text-anchor="end">7h ago</text>
+        <text x="404" y="349" class="track-time" text-anchor="end">10h ago</text>
       </g>
       <!-- Row 8 -->
       <g>
@@ -171,6 +171,6 @@
         <text x="58" y="388" class="track-title">Ditto</text>
         <text x="58" y="401" class="track-artist">NewJeans</text>
 
-        <text x="404" y="393" class="track-time" text-anchor="end">7h ago</text>
+        <text x="404" y="393" class="track-time" text-anchor="end">10h ago</text>
       </g>
 </svg>
