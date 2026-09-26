@@ -32,7 +32,7 @@
 
         <text x="58" y="76" class="track-title">Maria</text>
         <text x="58" y="89" class="track-artist">HWASA</text>
-        <text x="404" y="81" class="track-time" text-anchor="end">20h ago</text>
+        <text x="404" y="81" class="track-time" text-anchor="end">23h ago</text>
       </g>
       <!-- Row 2 -->
       <g>
@@ -48,7 +48,7 @@
 
         <text x="58" y="120" class="track-title">Kill This Love</text>
         <text x="58" y="133" class="track-artist">BLACKPINK</text>
-        <text x="404" y="125" class="track-time" text-anchor="end">20h ago</text>
+        <text x="404" y="125" class="track-time" text-anchor="end">23h ago</text>
       </g>
       <!-- Row 3 -->
       <g>
