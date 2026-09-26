@@ -52,7 +52,7 @@
         <text x="58" y="80" class="track-title">Maria</text>
         <text x="58" y="93" class="track-artist">HWASA</text>
 
-        <text x="404" y="85" class="track-time" text-anchor="end">3h ago</text>
+        <text x="404" y="85" class="track-time" text-anchor="end">8h ago</text>
       </g>
       <!-- Row 2 -->
       <g>
@@ -69,7 +69,7 @@
         <text x="58" y="124" class="track-title">Kill This Love</text>
         <text x="58" y="137" class="track-artist">BLACKPINK</text>
 
-        <text x="404" y="129" class="track-time" text-anchor="end">3h ago</text>
+        <text x="404" y="129" class="track-time" text-anchor="end">8h ago</text>
       </g>
       <!-- Row 3 -->
       <g>
@@ -86,7 +86,7 @@
         <text x="58" y="168" class="track-title">Heavy Serenade</text>
         <text x="58" y="181" class="track-artist">NMIXX</text>
 
-        <text x="404" y="173" class="track-time" text-anchor="end">10h ago</text>
+        <text x="404" y="173" class="track-time" text-anchor="end">15h ago</text>
       </g>
       <!-- Row 4 -->
       <g>
@@ -103,7 +103,7 @@
         <text x="58" y="212" class="track-title">CHOOM</text>
         <text x="58" y="225" class="track-artist">BABYMONSTER</text>
 
-        <text x="404" y="217" class="track-time" text-anchor="end">11h ago</text>
+        <text x="404" y="217" class="track-time" text-anchor="end">16h ago</text>
       </g>
       <!-- Row 5 -->
       <g>
@@ -120,7 +120,7 @@
         <text x="58" y="256" class="track-title">Rich Man</text>
         <text x="58" y="269" class="track-artist">aespa</text>
 
-        <text x="404" y="261" class="track-time" text-anchor="end">11h ago</text>
+        <text x="404" y="261" class="track-time" text-anchor="end">16h ago</text>
       </g>
       <!-- Row 6 -->
       <g>
@@ -137,7 +137,7 @@
         <text x="58" y="300" class="track-title">Lemon Tang</text>
         <text x="58" y="313" class="track-artist">Hearts2Hearts</text>
 
-        <text x="404" y="305" class="track-time" text-anchor="end">11h ago</text>
+        <text x="404" y="305" class="track-time" text-anchor="end">16h ago</text>
       </g>
       <!-- Row 7 -->
       <g>
@@ -148,13 +148,13 @@
             <rect x="16" y="330" width="32" height="32" rx="5" />
           </clipPath>
         </defs>
-        <image href="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;32&quot; height=&quot;32&quot; viewBox=&quot;0 0 32 32&quot; fill=&quot;%23392e56&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;4&quot;/&gt;&lt;circle cx=&quot;16&quot; cy=&quot;16&quot; r=&quot;6&quot; fill=&quot;%2356477d&quot;/&gt;&lt;/svg&gt;" x="16" y="330" width="32" height="32" clip-path="url(#cover-clip-6)" preserveAspectRatio="xMidYMid slice" />
+        <image href="data:image/jpeg;base64,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" x="16" y="330" width="32" height="32" clip-path="url(#cover-clip-6)" preserveAspectRatio="xMidYMid slice" />
         <rect x="16" y="330" width="32" height="32" rx="5" fill="none" stroke="#483a6c" stroke-width="1" />
 
         <text x="58" y="344" class="track-title">Blue Valentine</text>
         <text x="58" y="357" class="track-artist">NMIXX</text>
 
-        <text x="404" y="349" class="track-time" text-anchor="end">11h ago</text>
+        <text x="404" y="349" class="track-time" text-anchor="end">16h ago</text>
       </g>
       <!-- Row 8 -->
       <g>
@@ -171,6 +171,6 @@
         <text x="58" y="388" class="track-title">Tempo</text>
         <text x="58" y="401" class="track-artist">Exo</text>
 
-        <text x="404" y="393" class="track-time" text-anchor="end">11h ago</text>
+        <text x="404" y="393" class="track-time" text-anchor="end">16h ago</text>
       </g>
 </svg>
