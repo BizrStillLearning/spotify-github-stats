@@ -37,13 +37,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
+            
           git add dist/
-
           if ! git diff --cached --quiet; then
-            git commit -m "chore(spotify): update stats and top albums [skip ci]"
+            git commit -m "chore(spotify): update cached stats and top albums [skip ci]"
             git pull --rebase origin main
             git push origin main
           else
-              echo "Tidak ada perubahan trek maupun album, melewati commit."
+            echo "Tidak ada perubahan, melewati commit."
           fi

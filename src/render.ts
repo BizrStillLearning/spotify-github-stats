@@ -1,4 +1,4 @@
-import { TrackItem } from './spotify.js';
+import { TrackItem, AlbumItem } from './spotify.js';
 import { escapeXml, truncate } from './sanitize.js';
 
 export function renderSvg(tracks: TrackItem[]): string {
@@ -37,7 +37,6 @@ export function renderSvg(tracks: TrackItem[]): string {
 
         <text x="${paddingX + 42}" y="${y + 20}" class="track-title">${safeTitle}</text>
         <text x="${paddingX + 42}" y="${y + 33}" class="track-artist">${safeArtist}</text>
-
         <text x="${width - paddingX}" y="${y + 25}" class="track-time" text-anchor="end">${t.timeAgo}</text>
       </g>`;
             })
@@ -46,29 +45,10 @@ export function renderSvg(tracks: TrackItem[]): string {
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${totalHeight}" viewBox="0 0 ${width} ${totalHeight}" fill="none">
   <defs>
     <style>
-      .track-title {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        font-size: 12px;
-        font-weight: 600;
-        fill: #f1edfa;
-      }
-      .track-artist {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        font-size: 11px;
-        fill: #b4a5d4;
-      }
-      .track-time {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 11px;
-        fill: #8574a8;
-      }
-      .header-title {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        fill: #d5c8ed;
-      }
+      .track-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 600; fill: #f1edfa; }
+      .track-artist { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; fill: #b4a5d4; }
+      .track-time { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; fill: #8574a8; }
+      .header-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; fill: #d5c8ed; }
     </style>
   </defs>
 
@@ -82,5 +62,54 @@ export function renderSvg(tracks: TrackItem[]): string {
   </g>
 
   ${rows}
+</svg>`;
+}
+
+export function renderAlbumGridSvg(albums: AlbumItem[]): string {
+    const cardSize = 120;
+    const gap = 12;
+    const padding = 16;
+    const headerHeight = 36;
+    const cols = 2;
+    const rows = 3;
+
+    const totalWidth = padding * 2 + cols * cardSize + (cols - 1) * gap;
+    const totalHeight = headerHeight + rows * cardSize + (rows - 1) * gap + padding;
+
+    const fallbackCover =
+        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="%23392e56"><rect width="120" height="120" rx="10"/><circle cx="60" cy="60" r="24" fill="%2356477d"/></svg>';
+
+    const albumCards = Array.from({ length: 6 }).map((_, idx) => {
+        const album = albums[idx];
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+        const x = padding + col * (cardSize + gap);
+        const y = headerHeight + row * (cardSize + gap);
+        const clipId = `grid-clip-${idx}`;
+        const cover = escapeXml(album?.albumArtBase64 || fallbackCover);
+
+        return `
+    <g transform="translate(${x}, ${y})">
+      <defs>
+        <clipPath id="${clipId}">
+          <rect width="${cardSize}" height="${cardSize}" rx="10" />
+        </clipPath>
+      </defs>
+      <image href="${cover}" width="${cardSize}" height="${cardSize}" clip-path="url(#${clipId})" preserveAspectRatio="xMidYMid slice" />
+      <rect width="${cardSize}" height="${cardSize}" rx="10" fill="none" stroke="#392e56" stroke-width="1" />
+    </g>`;
+    }).join('');
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${totalWidth}" height="${totalHeight}" viewBox="0 0 ${totalWidth} ${totalHeight}" fill="none">
+  <defs>
+    <style>
+      .header-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; fill: #d5c8ed; }
+    </style>
+  </defs>
+  <rect width="${totalWidth}" height="${totalHeight}" rx="12" fill="#28203d" stroke="#392e56" stroke-width="1" />
+  <g transform="translate(${padding}, 24)">
+    <text x="0" y="0" class="header-title">TOP ALBUMS</text>
+  </g>
+  ${albumCards}
 </svg>`;
 }
