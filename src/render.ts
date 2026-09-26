@@ -66,10 +66,10 @@ export function renderSvg(tracks: TrackItem[]): string {
 }
 
 export function renderAlbumGridSvg(albums: AlbumItem[]): string {
-    const cardSize = 120;
-    const gap = 12;
-    const padding = 16;
-    const headerHeight = 36;
+    const cardSize = 86;
+    const gap = 10;
+    const padding = 14;
+    const headerHeight = 32;
     const cols = 2;
     const rows = 3;
 
@@ -77,7 +77,7 @@ export function renderAlbumGridSvg(albums: AlbumItem[]): string {
     const totalHeight = headerHeight + rows * cardSize + (rows - 1) * gap + padding;
 
     const fallbackCover =
-        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="%23392e56"><rect width="120" height="120" rx="10"/><circle cx="60" cy="60" r="24" fill="%2356477d"/></svg>';
+        `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="${cardSize}" height="${cardSize}" viewBox="0 0 ${cardSize} ${cardSize}" fill="%23392e56"><rect width="${cardSize}" height="${cardSize}" rx="8"/><circle cx="${cardSize/2}" cy="${cardSize/2}" r="16" fill="%2356477d"/></svg>`;
 
     const albumCards = Array.from({ length: 6 }).map((_, idx) => {
         const album = albums[idx];
@@ -92,22 +92,22 @@ export function renderAlbumGridSvg(albums: AlbumItem[]): string {
     <g transform="translate(${x}, ${y})">
       <defs>
         <clipPath id="${clipId}">
-          <rect width="${cardSize}" height="${cardSize}" rx="10" />
+          <rect width="${cardSize}" height="${cardSize}" rx="8" />
         </clipPath>
       </defs>
       <image href="${cover}" width="${cardSize}" height="${cardSize}" clip-path="url(#${clipId})" preserveAspectRatio="xMidYMid slice" />
-      <rect width="${cardSize}" height="${cardSize}" rx="10" fill="none" stroke="#392e56" stroke-width="1" />
+      <rect width="${cardSize}" height="${cardSize}" rx="8" fill="none" stroke="#392e56" stroke-width="1" />
     </g>`;
     }).join('');
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${totalWidth}" height="${totalHeight}" viewBox="0 0 ${totalWidth} ${totalHeight}" fill="none">
   <defs>
     <style>
-      .header-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; fill: #d5c8ed; }
+      .header-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; fill: #d5c8ed; }
     </style>
   </defs>
   <rect width="${totalWidth}" height="${totalHeight}" rx="12" fill="#28203d" stroke="#392e56" stroke-width="1" />
-  <g transform="translate(${padding}, 24)">
+  <g transform="translate(${padding}, 22)">
     <text x="0" y="0" class="header-title">TOP ALBUMS</text>
   </g>
   ${albumCards}
