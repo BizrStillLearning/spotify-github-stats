@@ -32,7 +32,7 @@
 
         <text x="58" y="80" class="track-title">Maria</text>
         <text x="58" y="93" class="track-artist">HWASA</text>
-        <text x="404" y="85" class="track-time" text-anchor="end">19h ago</text>
+        <text x="404" y="85" class="track-time" text-anchor="end">20h ago</text>
       </g>
       <!-- Row 2 -->
       <g>
