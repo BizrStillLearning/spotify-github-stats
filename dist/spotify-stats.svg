@@ -1,29 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="420" height="424" viewBox="0 0 420 424" fill="none">
   <defs>
     <style>
-      .track-title {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        font-size: 12px;
-        font-weight: 600;
-        fill: #f1edfa;
-      }
-      .track-artist {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        font-size: 11px;
-        fill: #b4a5d4;
-      }
-      .track-time {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 11px;
-        fill: #8574a8;
-      }
-      .header-title {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        fill: #d5c8ed;
-      }
+      .track-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 600; fill: #f1edfa; }
+      .track-artist { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; fill: #b4a5d4; }
+      .track-time { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; fill: #8574a8; }
+      .header-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; fill: #d5c8ed; }
     </style>
   </defs>
 
@@ -51,8 +32,7 @@
 
         <text x="58" y="80" class="track-title">Maria</text>
         <text x="58" y="93" class="track-artist">HWASA</text>
-
-        <text x="404" y="85" class="track-time" text-anchor="end">17h ago</text>
+        <text x="404" y="85" class="track-time" text-anchor="end">19h ago</text>
       </g>
       <!-- Row 2 -->
       <g>
@@ -68,8 +48,7 @@
 
         <text x="58" y="124" class="track-title">Kill This Love</text>
         <text x="58" y="137" class="track-artist">BLACKPINK</text>
-
-        <text x="404" y="129" class="track-time" text-anchor="end">17h ago</text>
+        <text x="404" y="129" class="track-time" text-anchor="end">19h ago</text>
       </g>
       <!-- Row 3 -->
       <g>
@@ -85,7 +64,6 @@
 
         <text x="58" y="168" class="track-title">Heavy Serenade</text>
         <text x="58" y="181" class="track-artist">NMIXX</text>
-
         <text x="404" y="173" class="track-time" text-anchor="end">1d ago</text>
       </g>
       <!-- Row 4 -->
@@ -102,7 +80,6 @@
 
         <text x="58" y="212" class="track-title">CHOOM</text>
         <text x="58" y="225" class="track-artist">BABYMONSTER</text>
-
         <text x="404" y="217" class="track-time" text-anchor="end">1d ago</text>
       </g>
       <!-- Row 5 -->
@@ -119,7 +96,6 @@
 
         <text x="58" y="256" class="track-title">Rich Man</text>
         <text x="58" y="269" class="track-artist">aespa</text>
-
         <text x="404" y="261" class="track-time" text-anchor="end">1d ago</text>
       </g>
       <!-- Row 6 -->
@@ -136,7 +112,6 @@
 
         <text x="58" y="300" class="track-title">Lemon Tang</text>
         <text x="58" y="313" class="track-artist">Hearts2Hearts</text>
-
         <text x="404" y="305" class="track-time" text-anchor="end">1d ago</text>
       </g>
       <!-- Row 7 -->
@@ -153,7 +128,6 @@
 
         <text x="58" y="344" class="track-title">Blue Valentine</text>
         <text x="58" y="357" class="track-artist">NMIXX</text>
-
         <text x="404" y="349" class="track-time" text-anchor="end">1d ago</text>
       </g>
       <!-- Row 8 -->
@@ -170,7 +144,6 @@
 
         <text x="58" y="388" class="track-title">Tempo</text>
         <text x="58" y="401" class="track-artist">Exo</text>
-
         <text x="404" y="393" class="track-time" text-anchor="end">1d ago</text>
       </g>
 </svg>
