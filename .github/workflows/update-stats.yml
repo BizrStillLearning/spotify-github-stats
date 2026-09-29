@@ -2,7 +2,7 @@ name: Update Spotify Stats
 
 on:
   schedule:
-    - cron: '*/20 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -15,35 +15,38 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: 'npm'
 
       - name: Install Dependencies
         run: npm ci
 
-      - name: Generate Spotify Card
+      - name: Verify Environment Variables
+        run: |
+          if [ -z "${{ secrets.LASTFM_API_KEY }}" ] || [ -z "${{ secrets.LASTFM_USERNAME }}" ]; then
+            echo "::error::LASTFM_API_KEY atau LASTFM_USERNAME belum diatur di Settings -> Secrets -> Actions!"
+            exit 1
+          fi
+
+      - name: Generate Spotify & Top Albums Cards
         env:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_USERNAME: ${{ secrets.LASTFM_USERNAME }}
-        run: npm start
+        run: npm run start
 
       - name: Commit & Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-            
+
           git add -f dist/*.svg
-          
           if ! git diff --cached --quiet; then
-            git commit -m "chore(spotify): update cached stats and top albums [skip ci]"
-            git pull --rebase origin main
+            git commit -m "chore(spotify): auto-update stats and top albums [skip ci]"
             git push origin main
           else
-            echo "Tidak ada perubahan, melewati commit."
+            echo "Tidak ada perubahan trek/album, melewati commit."
           fi
