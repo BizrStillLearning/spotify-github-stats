@@ -32,7 +32,7 @@
 
         <text x="58" y="76" class="track-title">Monster</text>
         <text x="58" y="89" class="track-artist">Exo</text>
-        <text x="404" y="81" class="track-time" text-anchor="end">1h ago</text>
+        <text x="404" y="81" class="track-time" text-anchor="end">8h ago</text>
       </g>
       <!-- Row 2 -->
       <g>
@@ -48,7 +48,7 @@
 
         <text x="58" y="120" class="track-title">RUDE!</text>
         <text x="58" y="133" class="track-artist">Hearts2Hearts</text>
-        <text x="404" y="125" class="track-time" text-anchor="end">1h ago</text>
+        <text x="404" y="125" class="track-time" text-anchor="end">8h ago</text>
       </g>
       <!-- Row 3 -->
       <g>
@@ -64,7 +64,7 @@
 
         <text x="58" y="164" class="track-title">FOCUS</text>
         <text x="58" y="177" class="track-artist">Hearts2Hearts</text>
-        <text x="404" y="169" class="track-time" text-anchor="end">1h ago</text>
+        <text x="404" y="169" class="track-time" text-anchor="end">8h ago</text>
       </g>
       <!-- Row 4 -->
       <g>
@@ -80,7 +80,7 @@
 
         <text x="58" y="208" class="track-title">IT&apos;S ME</text>
         <text x="58" y="221" class="track-artist">ILLIT</text>
-        <text x="404" y="213" class="track-time" text-anchor="end">1h ago</text>
+        <text x="404" y="213" class="track-time" text-anchor="end">8h ago</text>
       </g>
       <!-- Row 5 -->
       <g>
@@ -96,7 +96,7 @@
 
         <text x="58" y="252" class="track-title">Lemonade</text>
         <text x="58" y="265" class="track-artist">aespa</text>
-        <text x="404" y="257" class="track-time" text-anchor="end">1h ago</text>
+        <text x="404" y="257" class="track-time" text-anchor="end">8h ago</text>
       </g>
       <!-- Row 6 -->
       <g>
@@ -112,7 +112,7 @@
 
         <text x="58" y="296" class="track-title">Drunk-Dazed</text>
         <text x="58" y="309" class="track-artist">ENHYPEN</text>
-        <text x="404" y="301" class="track-time" text-anchor="end">2h ago</text>
+        <text x="404" y="301" class="track-time" text-anchor="end">8h ago</text>
       </g>
       <!-- Row 7 -->
       <g>
@@ -128,7 +128,7 @@
 
         <text x="58" y="340" class="track-title">BAD</text>
         <text x="58" y="353" class="track-artist">ATEEZ</text>
-        <text x="404" y="345" class="track-time" text-anchor="end">9h ago</text>
+        <text x="404" y="345" class="track-time" text-anchor="end">16h ago</text>
       </g>
       <!-- Row 8 -->
       <g>
@@ -144,6 +144,6 @@
 
         <text x="58" y="384" class="track-title">Tempo</text>
         <text x="58" y="397" class="track-artist">Exo</text>
-        <text x="404" y="389" class="track-time" text-anchor="end">10h ago</text>
+        <text x="404" y="389" class="track-time" text-anchor="end">16h ago</text>
       </g>
 </svg>
