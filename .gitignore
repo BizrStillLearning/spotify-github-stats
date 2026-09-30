@@ -1,6 +1,9 @@
-node_modules/
+node_modules
+.next/
+out/
+build/
+dist/
 .env
-
-dist/*
-!dist/top-albums.svg
-!dist/spotify-stats.svg
+.env.local
+.env*.local
+*.log

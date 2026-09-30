@@ -1,23 +1,28 @@
 {
   "name": "spotify-github-stats",
-  "version": "1.0.0",
-  "type": "module",
+  "version": "2.0.0",
+  "private": true,
   "scripts": {
-    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./dist/tailwind.css --minify",
-    "start": "npm run build:css && tsx src/index.ts",
-    "auth:setup": "node scripts/setup-token.mjs"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^26.6.3",
-    "@vercel/node": "^16.0.2",
-    "tsx": "^4.23.13",
-    "typescript": "^7.0.2"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.3.3",
-    "tailwindcss": "^4.3.3"
+    "@tailwindcss/postcss": "^4.3.3",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.16.0",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.0"
   }
 }

@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+    --color-synth-dark: #120e1f;
+    --color-synth-surface: #1c152e;
+    --color-synth-card: #28203d;
+    --color-synth-border: #392e56;
+    --color-synth-text: #f1edfa;
+    --color-synth-muted: #8574a8;
+}
+
+body {
+    background-color: var(--color-synth-dark);
+    color: var(--color-synth-text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}

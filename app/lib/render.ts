@@ -1,5 +1,5 @@
-import { TrackItem, AlbumItem } from './spotify.js';
-import { escapeXml, truncate } from './sanitize.js';
+import { TrackItem, AlbumItem } from './spotify';
+import { escapeXml, truncate } from './sanitize';
 
 export function renderSvg(tracks: TrackItem[]): string {
     const rowHeight = 44;
@@ -13,7 +13,7 @@ export function renderSvg(tracks: TrackItem[]): string {
         'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="%23392e56"><rect width="32" height="32" rx="4"/><circle cx="16" cy="16" r="6" fill="%2356477d"/></svg>';
 
     const rows = tracks.length === 0
-        ? `<text x="${paddingX}" y="${tableTop + 24}" fill="#9282b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">No recent tracks available.</text>`
+        ? `<text x="${paddingX}" y="${tableTop + 24}" fill="#9282b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="12">No recent tracks recorded.</text>`
         : tracks
             .slice(0, 8)
             .map((t, idx) => {
@@ -27,7 +27,6 @@ export function renderSvg(tracks: TrackItem[]): string {
       <!-- Row ${idx + 1} -->
       <g>
         <line x1="${paddingX}" y1="${y}" x2="${width - paddingX}" y2="${y}" stroke="#392e56" stroke-width="1" />
-        
         <defs>
           <clipPath id="${clipId}">
             <rect x="${paddingX}" y="${y + 6}" width="32" height="32" rx="5" />
@@ -38,7 +37,7 @@ export function renderSvg(tracks: TrackItem[]): string {
 
         <text x="${paddingX + 42}" y="${y + 20}" class="track-title">${safeTitle}</text>
         <text x="${paddingX + 42}" y="${y + 33}" class="track-artist">${safeArtist}</text>
-        <text x="${width - paddingX}" y="${y + 25}" class="track-time" text-anchor="end">${t.timeAgo}</text>
+        <text x="${width - paddingX}" y="${y + 25}" class="track-time" text-anchor="end" fill="${t.isPlaying ? '#1ed760' : '#8574a8'}">${t.timeAgo}</text>
       </g>`;
             })
             .join('');
@@ -52,16 +51,13 @@ export function renderSvg(tracks: TrackItem[]): string {
       .header-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; fill: #d5c8ed; }
     </style>
   </defs>
-
   <rect width="${width}" height="${totalHeight}" rx="14" fill="#28203d" stroke="#392e56" stroke-width="1" />
-
   <g transform="translate(${paddingX}, 26)">
     <text x="0" y="0" class="header-title">RECENTLY PLAYED</text>
     <g transform="translate(${width - paddingX * 2 - 18}, -13)">
       <path fill="#1ed760" d="M9 0C4.029 0 0 4.029 0 9s4.029 9 9 9 9-4.029 9-9S13.971 0 9 0zm4.127 12.982c-.162.265-.507.348-.771.186-2.115-1.291-4.777-1.584-7.914-.867-.302.069-.603-.12-.672-.421-.069-.301.12-.603.421-.672 3.428-.784 6.369-.447 8.75 1.003.264.162.348.507.186.771zm1.103-2.452c-.203.33-.635.433-.965.231-2.42-1.487-6.107-1.918-8.969-1.049-.372.113-.764-.096-.877-.468-.113-.372.096-.764.469-.877 3.268-.991 7.332-.511 10.11 1.198.33.203.434.635.232.965zm.094-2.551C11.6 6.345 6.815 6.188 3.967 7.053c-.453.138-.933-.117-1.071-.57-.138-.453.117-.933.57-1.071 3.258-.988 8.539-.808 11.829 1.146.408.242.542.77.3 1.178-.242.408-.77.542-1.178.3z"/>
     </g>
   </g>
-
   ${rows}
 </svg>`;
 }
@@ -73,7 +69,6 @@ export function renderAlbumGridSvg(albums: AlbumItem[]): string {
     const headerHeight = 36;
     const cols = 2;
     const rows = 3;
-
     const totalWidth = padding * 2 + cols * cardSize + (cols - 1) * gap;
     const totalHeight = 428;
 

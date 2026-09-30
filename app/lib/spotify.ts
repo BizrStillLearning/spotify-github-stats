@@ -33,10 +33,8 @@ async function imageToBase64(imageUrl: string): Promise<string | null> {
     try {
         const response = await fetch(imageUrl);
         if (!response.ok) return null;
-
         const contentType = response.headers.get('content-type') || '';
         if (!contentType.startsWith('image/')) return null;
-
         const arrayBuffer = await response.arrayBuffer();
         return `data:${contentType};base64,${Buffer.from(arrayBuffer).toString('base64')}`;
     } catch {
@@ -50,9 +48,9 @@ export async function getRecentTracks(apiKey: string, username: string, limit = 
     )}&api_key=${encodeURIComponent(apiKey)}&format=json&limit=${limit}`;
 
     try {
-        const res = await fetch(url);
+        const res = await fetch(url, { cache: 'no-store' });
         if (!res.ok) {
-            console.error(`[LASTFM ERROR getRecentTracks] HTTP status: ${res.status}`);
+            console.error('[LastFM] Fetch status failed:', res.status, res.statusText);
             return [];
         }
 
@@ -62,16 +60,15 @@ export async function getRecentTracks(apiKey: string, username: string, limit = 
 
         const trackList = Array.isArray(rawTracks) ? rawTracks : [rawTracks];
 
-        const tracks: TrackItem[] = await Promise.all(
+        return await Promise.all(
             trackList.slice(0, limit).map(async (item: any) => {
                 const isPlaying = item['@attr']?.nowplaying === 'true';
                 const images = item.image || [];
-                const coverObj =
-                    images.find((img: { size: string }) => img.size === 'medium') ||
-                    images[0];
+                const coverObj = images.find((img: { size: string }) => img.size === 'medium') || images[0];
                 const coverUrl = coverObj?.['#text'];
                 const albumArtBase64 = coverUrl ? await imageToBase64(coverUrl) : null;
-                const timeAgo = isPlaying ? '1m ago' : formatRelativeTime(item.date?.uts);
+
+                const timeAgo = isPlaying ? 'Playing now' : formatRelativeTime(item.date?.uts);
 
                 return {
                     title: item.name || 'Unknown Track',
@@ -79,14 +76,12 @@ export async function getRecentTracks(apiKey: string, username: string, limit = 
                     album: item.album?.['#text'] || 'Unknown Album',
                     albumArtBase64,
                     isPlaying,
-                    timeAgo
+                    timeAgo,
                 };
             })
         );
-
-        return tracks;
     } catch (err) {
-        console.error('[LASTFM ERROR getRecentTracks]', err);
+        console.error('[LastFM Error getRecentTracks]', err);
         return [];
     }
 }
@@ -97,11 +92,8 @@ export async function getTopAlbums(apiKey: string, username: string, limit = 6):
     )}&api_key=${encodeURIComponent(apiKey)}&format=json&limit=${limit}&period=overall`;
 
     try {
-        const res = await fetch(url);
-        if (!res.ok) {
-            console.error(`[LASTFM ERROR getTopAlbums] HTTP status: ${res.status}`);
-            return [];
-        }
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) return [];
 
         const data = await res.json();
         const rawAlbums = data?.topalbums?.album;
@@ -109,14 +101,13 @@ export async function getTopAlbums(apiKey: string, username: string, limit = 6):
 
         const albumList = Array.isArray(rawAlbums) ? rawAlbums : [rawAlbums];
 
-        const albums: AlbumItem[] = await Promise.all(
+        return await Promise.all(
             albumList.slice(0, limit).map(async (item: any) => {
                 const images = item.image || [];
                 const coverObj =
                     images.find((img: { size: string }) => img.size === 'large') ||
                     images.find((img: { size: string }) => img.size === 'extralarge') ||
                     images[0];
-
                 const coverUrl = coverObj?.['#text'];
                 const albumArtBase64 = coverUrl ? await imageToBase64(coverUrl) : null;
 
@@ -124,14 +115,12 @@ export async function getTopAlbums(apiKey: string, username: string, limit = 6):
                     title: item.name || 'Unknown Album',
                     artist: item.artist?.name || 'Unknown Artist',
                     albumArtBase64,
-                    url: item.url || 'https://www.last.fm'
+                    url: item.url || 'https://www.last.fm',
                 };
             })
         );
-
-        return albums;
     } catch (err) {
-        console.error('[LASTFM ERROR getTopAlbums]', err);
+        console.error('[LastFM Error getTopAlbums]', err);
         return [];
     }
 }

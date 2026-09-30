@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { getRecentTracks, getTopAlbums } from './spotify.js';
-import { renderSvg, renderAlbumGridSvg } from './render.js';
+import { getRecentTracks, getTopAlbums } from '@/app/lib/spotify.js';
+import { renderSvg, renderAlbumGridSvg } from '@/app/lib/render.js';
 
 async function main() {
     const apiKey = process.env.LASTFM_API_KEY;
