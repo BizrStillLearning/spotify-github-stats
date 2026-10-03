@@ -257,12 +257,26 @@ export function renderNowPlayingSvg(track: TrackItem, themeName = 'synthwave', s
     const safeTitle = escapeXml(truncate(track.title, 42));
     const safeArtist = escapeXml(truncate(track.artist, 45));
 
+    const badgeText = track.isPlaying ? 'NOW STREAMING ON SPOTIFY' : `LAST STREAMED • ${track.timeAgo.toUpperCase()}`;
+    const badgeColor = track.isPlaying ? t.accent : t.time;
+    const equalizerColor = track.isPlaying ? t.accent : t.divider;
+
+    const equalizerBars = track.isPlaying
+        ? `
+    <rect class="bar-1" x="0" y="0" width="4" height="16" rx="2" fill="${equalizerColor}" />
+    <rect class="bar-2" x="7" y="0" width="4" height="16" rx="2" fill="${equalizerColor}" />
+    <rect class="bar-3" x="14" y="0" width="4" height="16" rx="2" fill="${equalizerColor}" />`
+        : `
+    <rect x="0" y="10" width="4" height="6" rx="2" fill="${equalizerColor}" />
+    <rect x="7" y="6" width="4" height="10" rx="2" fill="${equalizerColor}" />
+    <rect x="14" y="12" width="4" height="4" rx="2" fill="${equalizerColor}" />`;
+
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none">
   <defs>
     <style>
       .np-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: ${t.title}; }
       .np-artist { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; fill: ${t.artist}; }
-      .np-badge { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; fill: ${t.accent}; }
+      .np-badge { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; fill: ${badgeColor}; }
       @keyframes eq1 { 0%, 100% { height: 4px; y: 16px; } 50% { height: 18px; y: 2px; } }
       @keyframes eq2 { 0%, 100% { height: 18px; y: 2px; } 50% { height: 6px; y: 14px; } }
       @keyframes eq3 { 0%, 100% { height: 10px; y: 10px; } 50% { height: 20px; y: 0px; } }
@@ -281,15 +295,13 @@ export function renderNowPlayingSvg(track: TrackItem, themeName = 'synthwave', s
   <rect x="16" y="16" width="52" height="52" rx="8" fill="none" stroke="${t.border}" stroke-width="1" />
 
   <g transform="translate(80, 28)">
-    <text x="0" y="0" class="np-badge">NOW STREAMING ON SPOTIFY</text>
+    <text x="0" y="0" class="np-badge">${badgeText}</text>
     <text x="0" y="20" class="np-title">${safeTitle}</text>
     <text x="0" y="37" class="np-artist">${safeArtist}</text>
   </g>
 
   <g transform="translate(${width - 48}, 32)">
-    <rect class="bar-1" x="0" y="0" width="4" height="16" rx="2" fill="${t.accent}" />
-    <rect class="bar-2" x="7" y="0" width="4" height="16" rx="2" fill="${t.accent}" />
-    <rect class="bar-3" x="14" y="0" width="4" height="16" rx="2" fill="${t.accent}" />
+    ${equalizerBars}
   </g>
 </svg>`;
 }
