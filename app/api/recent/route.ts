@@ -8,17 +8,19 @@ export const revalidate = 0;
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const user = searchParams.get('user') || process.env.LASTFM_USERNAME;
+    const theme = searchParams.get('theme') || 'synthwave';
+    const showBorder = searchParams.get('border') !== 'false';
     const apiKey = process.env.LASTFM_API_KEY;
 
     if (!apiKey) {
-        return new NextResponse('Server Error: Missing LASTFM_API_KEY in environment', { status: 500 });
+        return new NextResponse('Server Error: Missing LASTFM_API_KEY', { status: 500 });
     }
     if (!user) {
         return new NextResponse('Missing parameter ?user=', { status: 400 });
     }
 
     const tracks = await getRecentTracks(apiKey, user, 8);
-    const svg = renderSvg(tracks);
+    const svg = renderSvg(tracks, theme, showBorder);
 
     return new NextResponse(svg, {
         headers: {
