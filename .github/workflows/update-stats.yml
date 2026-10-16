@@ -36,7 +36,7 @@ jobs:
         env:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_USERNAME: ${{ secrets.LASTFM_USERNAME }}
-        run: npm run start
+        run: npx --yes tsx src/index.ts
 
       - name: Commit & Push Changes
         run: |
